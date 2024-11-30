@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React from "react";
+import React, { memo } from "react";
 
 interface FunctionCardProps {
   cardNumber: number;
@@ -8,13 +8,11 @@ interface FunctionCardProps {
   onEquationChange: (id: number | null, equation: string) => void;
 }
 
-const FunctionCard: React.FC<FunctionCardProps> = ({
-  cardNumber,
-  id,
-  equation,
-  onEquationChange,
-}) => {
+const FunctionCard: React.FC<FunctionCardProps> = (props) => {
+  const { id, cardNumber, equation, onEquationChange } = props;
+
   const optionValue = `${id === null ? "-" : `Function: ${id}`}`;
+
   return (
     <div className="w-[235px] h-auto p-5 bg-white border border-[#DFDFDF] rounded-[15px] gap-5 flex flex-col">
       <div className="flex gap-[7px] justify-start items-center">
@@ -62,4 +60,4 @@ const FunctionCard: React.FC<FunctionCardProps> = ({
   );
 };
 
-export default FunctionCard;
+export default memo(FunctionCard);
