@@ -1,41 +1,76 @@
 "use client";
 
 import FunctionCard from "@/components/FunctionCard";
-import ResultDisplay from "@/components/ResultDisplay";
-import React, { useState } from "react";
+import InputOut from "@/components/InputOut";
+import React, { useState, useCallback } from "react";
+
+type FunctionItem = {
+  id: number | null;
+  equation: string;
+};
+
+const adjustEquation = (equation: string): string => {
+  const parts: string[] = equation.split("");
+  const adjustedParts: string[] = parts.map((part, index) => {
+    if (part === "x") {
+      const prev = parts[index - 1];
+      const next = parts[index + 1];
+      if (prev && !isNaN(Number(prev))) {
+        return `*x`;
+      } else if (next && !isNaN(Number(next))) {
+        return `x*${next}`;
+      }
+    }
+    return part;
+  });
+  return adjustedParts.join("");
+};
 
 const App: React.FC = () => {
-  const [initialInput, setInitialInput] = useState<number>(2);
-  const [functions, setFunctions] = useState([
+  const [initialInput, setInitialInput] = useState<string>("2");
+  const [functions, setFunctions] = useState<FunctionItem[]>([
     { id: 2, equation: "x^2" },
-    { id: 4, equation: "2*x+4" },
-    { id: null, equation: "x-2" },
-    { id: 5, equation: "x/2" },
-    { id: 3, equation: "x^2+20" },
+    { id: 4, equation: "2x+4" },
+    { id: 6, equation: "x^2+20" },
+    { id: 5, equation: "x-2" },
+    { id: 3, equation: "x/2" },
   ]);
 
-  const handleEquationChange = (id: number | null, equation: string) => {
-    if(id){
-      setFunctions((prev) =>
-        prev.map((f) => (f.id === id ? { ...f, equation } : f))
+  const handleEquationChange = useCallback(
+    (id: number | null, equation: string) => {
+      setFunctions((prevFunctions) =>
+        prevFunctions.map((f) => (f.id === id ? { ...f, equation } : f))
       );
-    }
-  };
+    },
+    []
+  );
 
-  const calculateResult = () => {
+  const calculateResult = useCallback(() => {
+    if (!initialInput) return NaN;
+
     try {
-      let result = initialInput;
-      const chainOrder = [1, 2, 4, 5, 3];
+      let result = parseFloat(initialInput);
+      const chainOrder = [2, 4, 5, 3, 6];
       chainOrder.forEach((id) => {
         const func = functions.find((f) => f.id === id);
-        if (func) {
-          const parsedEquation = func.equation.replace(/x/g, `${result}`);
-          result = eval(parsedEquation.replace("^", "**"));
+        if (func && func.id !== null) {
+          let parsedEquation = adjustEquation(func.equation);
+          parsedEquation = parsedEquation.replace(/x/g, `${result}`);
+          parsedEquation = parsedEquation.replace(/\^/g, "**");
+          result = eval(parsedEquation);
         }
       });
       return result;
-    } catch {
+    } catch (error) {
+      console.error("Error during evaluation:", error);
       return NaN;
+    }
+  }, [initialInput, functions]);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const value = e.target.value;
+    if (/^\d*\.?\d*$/.test(value)) {
+      setInitialInput(value);
     }
   };
 
@@ -43,32 +78,34 @@ const App: React.FC = () => {
 
   return (
     <div className="flex items-center justify-center h-screen">
-      <div className="md:container flex">
-        <div className="flex items-center space-x-4">
-          <div className="text-yellow-600 font-bold">
-            <label>Initial value of x:</label>
-            <input
-              type="number"
-              value={initialInput}
-              onChange={(e) => setInitialInput(parseFloat(e.target.value) || 0)}
-              className="border rounded px-4 py-2 ml-2"
-            />
-          </div>
-        </div>
+      <div className="md:container flex justify-center items-center">
+        <InputOut
+          lable="Initial value of x:"
+          value={initialInput}
+          onChange={handleInputChange}
+          type="input"
+        />
         <div className="relative w-full flex justify-center mt-6">
-          <div className="flex gap-[131px] justify-center items-center flex-wrap">
-            {functions.map((func, key: number) => (
-              <FunctionCard
-                key={key}
-                cardNumber={key + 1}
-                id={func.id}
-                equation={func.equation}
-                onEquationChange={handleEquationChange}
-              />
-            ))}
+          <div className="flex w-full">
+            <div className="flex justify-center items-center flex-wrap gap-[131px]">
+              {functions.map((func, index) => (
+                <FunctionCard
+                  key={index}
+                  cardNumber={index + 1}
+                  id={func.id}
+                  equation={func.equation}
+                  onEquationChange={handleEquationChange}
+                />
+              ))}
+            </div>
           </div>
         </div>
-        <ResultDisplay result={finalResult} />
+        <InputOut
+          lable="Final Output y"
+          value={Number.isNaN(finalResult) ? "0" : `${finalResult}`}
+          onChange={handleInputChange}
+          type="output"
+        />
       </div>
     </div>
   );

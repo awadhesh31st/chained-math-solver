@@ -11,7 +11,7 @@ interface FunctionCardProps {
 const FunctionCard: React.FC<FunctionCardProps> = (props) => {
   const { id, cardNumber, equation, onEquationChange } = props;
 
-  const optionValue = `${id === null ? "-" : `Function: ${id}`}`;
+  const optionValue = `${id === 6 ? "-" : `Function: ${id}`}`;
 
   return (
     <div className="w-[235px] h-auto p-5 bg-white border border-[#DFDFDF] rounded-[15px] gap-5 flex flex-col">
