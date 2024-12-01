@@ -80,7 +80,7 @@ const App: React.FC = () => {
     <div className="flex items-center justify-center h-screen">
       <div className="md:container flex justify-center items-center">
         <InputOut
-          lable="Initial value of x:"
+          lable="Initial value of x"
           value={initialInput}
           onChange={handleInputChange}
           type="input"
