@@ -78,35 +78,44 @@ const App: React.FC = () => {
 
   return (
     <div className="flex items-center justify-center h-screen">
-      <div className="md:container flex justify-center items-center">
-        <div className="">
-          <InputOut
-            lable="Initial value of x"
-            value={initialInput}
-            onChange={handleInputChange}
-            type="input"
-          />
-        </div>
-        <div className="flex w-full">
+      <div className="md:container">
+        <div className="w-full flex justify-center gap-2">
           <div className="flex justify-center items-center flex-wrap gap-[131px]">
-            {functions.map((func, index) => (
-              <FunctionCard
-                key={index}
-                cardNumber={index + 1}
-                id={func.id}
-                equation={func.equation}
-                onEquationChange={handleEquationChange}
-              />
-            ))}
+            {functions.map((func, index) => {
+              return (
+                <div className="flex" key={index}>
+                  {index === 0 && (
+                    <div className="flex mr-[9px]">
+                      <InputOut
+                        lable="Initial value of x"
+                        value={initialInput}
+                        onChange={handleInputChange}
+                        type="input"
+                      />
+                    </div>
+                  )}
+                  <FunctionCard
+                    cardNumber={index + 1}
+                    id={func.id}
+                    equation={func.equation}
+                    onEquationChange={handleEquationChange}
+                  />
+                  {index === 2 && (
+                    <div className="flex ml-[9px]">
+                      <InputOut
+                        lable="Final Output y"
+                        value={
+                          Number.isNaN(finalResult) ? "0" : `${finalResult}`
+                        }
+                        onChange={handleInputChange}
+                        type="output"
+                      />
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
-        </div>
-        <div>
-          <InputOut
-            lable="Final Output y"
-            value={Number.isNaN(finalResult) ? "0" : `${finalResult}`}
-            onChange={handleInputChange}
-            type="output"
-          />
         </div>
       </div>
     </div>

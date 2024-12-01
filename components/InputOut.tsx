@@ -10,7 +10,7 @@ type InputOutType = {
 
 const InputOut: FC<InputOutType> = ({ lable, value, onChange, type }) => {
   return (
-    <div className="flex space-x-4 justify-center items-center flex-col gap-[6px] w-[145px]">
+    <div className="flex space-x-4 justify-end items-center flex-col gap-[6px] w-[145px] h-full">
       <label
         className={`${
           type === "input" ? "bg-[#E29A2D]" : "bg-[#4CAF79]"
