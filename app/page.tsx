@@ -79,33 +79,35 @@ const App: React.FC = () => {
   return (
     <div className="flex items-center justify-center h-screen">
       <div className="md:container flex justify-center items-center">
-        <InputOut
-          lable="Initial value of x"
-          value={initialInput}
-          onChange={handleInputChange}
-          type="input"
-        />
-        <div className="relative w-full flex justify-center mt-6">
-          <div className="flex w-full">
-            <div className="flex justify-center items-center flex-wrap gap-[131px]">
-              {functions.map((func, index) => (
-                <FunctionCard
-                  key={index}
-                  cardNumber={index + 1}
-                  id={func.id}
-                  equation={func.equation}
-                  onEquationChange={handleEquationChange}
-                />
-              ))}
-            </div>
+        <div className="">
+          <InputOut
+            lable="Initial value of x"
+            value={initialInput}
+            onChange={handleInputChange}
+            type="input"
+          />
+        </div>
+        <div className="flex w-full">
+          <div className="flex justify-center items-center flex-wrap gap-[131px]">
+            {functions.map((func, index) => (
+              <FunctionCard
+                key={index}
+                cardNumber={index + 1}
+                id={func.id}
+                equation={func.equation}
+                onEquationChange={handleEquationChange}
+              />
+            ))}
           </div>
         </div>
-        <InputOut
-          lable="Final Output y"
-          value={Number.isNaN(finalResult) ? "0" : `${finalResult}`}
-          onChange={handleInputChange}
-          type="output"
-        />
+        <div>
+          <InputOut
+            lable="Final Output y"
+            value={Number.isNaN(finalResult) ? "0" : `${finalResult}`}
+            onChange={handleInputChange}
+            type="output"
+          />
+        </div>
       </div>
     </div>
   );
