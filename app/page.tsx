@@ -2,31 +2,10 @@
 
 import FunctionCard from "@/components/FunctionCard";
 import InputOut from "@/components/InputOut";
+import { adjustEquation } from "@/utils/equationParser";
 import React, { useState, useCallback } from "react";
 
-type FunctionItem = {
-  id: number | null;
-  equation: string;
-};
-
-const adjustEquation = (equation: string): string => {
-  const parts: string[] = equation.split("");
-  const adjustedParts: string[] = parts.map((part, index) => {
-    if (part === "x") {
-      const prev = parts[index - 1];
-      const next = parts[index + 1];
-      if (prev && !isNaN(Number(prev))) {
-        return `*x`;
-      } else if (next && !isNaN(Number(next))) {
-        return `x*${next}`;
-      }
-    }
-    return part;
-  });
-  return adjustedParts.join("");
-};
-
-const App: React.FC = () => {
+const App = () => {
   const [initialInput, setInitialInput] = useState<string>("2");
   const [functions, setFunctions] = useState<FunctionItem[]>([
     { id: 2, equation: "x^2" },
@@ -47,7 +26,6 @@ const App: React.FC = () => {
 
   const calculateResult = useCallback(() => {
     if (!initialInput) return NaN;
-
     try {
       let result = parseFloat(initialInput);
       const chainOrder = [2, 4, 5, 3, 6];

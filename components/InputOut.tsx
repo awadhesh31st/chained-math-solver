@@ -1,13 +1,6 @@
 import Image from "next/image";
 import { FC } from "react";
 
-type InputOutType = {
-  lable: string;
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  type: "input" | "output";
-};
-
 const InputOut: FC<InputOutType> = ({ lable, value, onChange, type }) => {
   return (
     <div className="flex space-x-4 justify-end items-center flex-col gap-[6px] w-[115px] h-full">

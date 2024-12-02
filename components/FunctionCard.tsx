@@ -1,13 +1,6 @@
 import Image from "next/image";
 import React, { memo } from "react";
 
-interface FunctionCardProps {
-  cardNumber: number;
-  id: number | null;
-  equation: string;
-  onEquationChange: (id: number | null, equation: string) => void;
-}
-
 const FunctionCard: React.FC<FunctionCardProps> = (props) => {
   const { id, cardNumber, equation, onEquationChange } = props;
 
