@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Chained Math Solver
+
+Welcome to the Chained Math Solver, a web application where users can input a mathematical equation and chain multiple functions together to calculate the result. Each function is linked in a fixed ordered chain, and users can modify the equations for each function.
+
+The application is designed to accept mathematical equations using basic arithmetic operators and exponents. The chained functions are executed in a fixed order (1 → 2 → 4 → 5 → 3), with the result passed from one function to the next.
+
+## Live Demo
+
+You can try out the application here:
+
+[Chained Math Solver](https://chained-math-solver.vercel.app/)
+
+## Features
+
+- **Function Cards:**  
+  The UI displays 5 cards, each representing a function in the chain. Users can modify the mathematical equations in the cards, and the results will be calculated sequentially through the fixed chain of functions.
+  
+- **Validator:**  
+  Each function card contains a text input for the mathematical equation. The input is validated to only accept basic arithmetic operations (addition, subtraction, multiplication, division) and exponents.
+
+- **Chaining Representation:**  
+  The functions are visually chained with connected lines, representing the flow of data from one function to the next. This chaining is fixed in the order 1 → 2 → 4 → 5 → 3.
+
+- **Dropdowns (Disabled):**  
+  A disabled dropdown is provided for each function to show the next function in the chain. Users cannot change the order of the functions.
+
+- **Initial Value Input:**  
+  Users can input an initial value (x), which will be passed to function 1. The result of the calculations will flow through all the functions, and the final output (y) will be displayed after the last function (function 3).
+
+## Function Execution Order
+
+The functions will be executed in the following fixed order:
+
+1. **Function 1**  
+2. **Function 2**  
+3. **Function 4**  
+4. **Function 5**  
+5. **Function 3**
+
+The input value (x) starts at function 1 and flows through each function until the final result is displayed at function 3.
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Node.js and npm installed on your local machine.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Installation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/chained-math-solver.git
