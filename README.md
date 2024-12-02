@@ -10,6 +10,8 @@ You can try out the application here:
 
 [Chained Math Solver](https://chained-math-solver.vercel.app/)
 
+<img width="1710" alt="image" src="https://github.com/user-attachments/assets/5601cf28-e91d-4b1a-9ed3-bb920b43604b">
+
 ## Features
 
 - **Function Cards:**  
