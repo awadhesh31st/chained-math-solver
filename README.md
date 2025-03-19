@@ -12,7 +12,7 @@ You can try out the application here:
 
 <img width="1710" alt="image" src="https://github.com/user-attachments/assets/5601cf28-e91d-4b1a-9ed3-bb920b43604b">
 
-## Features
+## Feature's
 
 - **Function Cards:**  
   The UI displays 5 cards, each representing a function in the chain. Users can modify the mathematical equations in the cards, and the results will be calculated sequentially through the fixed chain of functions.
